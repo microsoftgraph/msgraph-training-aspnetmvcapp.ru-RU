@@ -13,7 +13,7 @@
 </appSettings>
 ```
 
-Замените `YOUR_APP_ID_HERE` идентификатором приложения на портале регистрации приложений и замените `YOUR_APP_PASSWORD_HERE` созданным паролем. Кроме того, необходимо изменить `PORT` значение свойства в `ida:RedirectUri` соответствии с URL-адресом приложения.
+Замените `YOUR_APP_ID_HERE` идентификатором приложения на портале регистрации приложений и замените `YOUR_APP_PASSWORD_HERE` на созданный секрет клиента. Если ваш секрет клиента содержит амперсанд (`&`), не забудьте заменить их `&amp;` на в. `PrivateSettings.config` Кроме того, необходимо изменить `PORT` значение свойства в `ida:RedirectUri` соответствии с URL-адресом приложения.
 
 > [!IMPORTANT]
 > Если вы используете систему управления версиями (например, Git), то в дальнейшем будет полезно исключить `PrivateSettings.config` файл из системы управления версиями, чтобы избежать непреднамеренного утечки идентификатора и пароля приложения.
@@ -342,11 +342,6 @@ namespace graph_tutorial.TokenStorage
         private void Persist()
         {
             sessionLock.EnterReadLock();
-
-            // Optimistically set HasStateChanged to false.
-            // We need to do it early to avoid losing changes made by a concurrent thread.
-            tokenCache.HasStateChanged = false;
-
             httpContext.Session[cacheId] = tokenCache.Serialize();
             sessionLock.ExitReadLock();
         }
@@ -362,7 +357,7 @@ namespace graph_tutorial.TokenStorage
         private void AfterAccessNotification(TokenCacheNotificationArgs args)
         {
             // if the access operation resulted in a cache update
-            if (tokenCache.HasStateChanged)
+            if (args.HasStateChanged)
             {
                 Persist();
             }
