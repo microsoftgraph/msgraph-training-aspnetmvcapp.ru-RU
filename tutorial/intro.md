@@ -15,6 +15,6 @@
 > [!NOTE]
 > Это руководство было написано с помощью Visual Studio 2017 версии 15,81. Действия, описанные в этом руководстве, могут работать с другими версиями, но не тестировались.
 
-## <a name="feedback"></a>Отзывы
+## <a name="feedback"></a>Обратная связь
 
 Сообщите о нем в [репозиторий GitHub](https://github.com/microsoftgraph/msgraph-training-aspnetmvcapp).

@@ -13,7 +13,7 @@
 Каталог [демонстрации](./Demos) в этом репозитории содержит копии проекта, которые соответствуют выполнению отдельных разделов руководства. Если вы только захотите демонстрацию определенного раздела руководства, вы можете начать с версии, описанной в предыдущем разделе.
 
 - [01-Create-App](Demos/01-create-app): завершено [Создание веб-приложения ASP.NET MVC](https://docs.microsoft.com/graph/training/aspnet-tutorial?tutorial-step=1)
-- [02 – Add $ AAD – auth](Demos/02-add-aad-auth): завершено [Добавление проверки поДлинности для Azure AD](https://docs.microsoft.com/graph/training/aspnet-tutorial?tutorial-step=3)
+- [02 – Add $ AAD – auth](Demos/02-add-aad-auth): завершено [Добавление проверки подлинности для Azure AD](https://docs.microsoft.com/graph/training/aspnet-tutorial?tutorial-step=3)
 - [03 – Add – msgraph](Demos/03-add-msgraph): Completed [Получение данных календаря](https://docs.microsoft.com/graph/training/aspnet-tutorial?tutorial-step=4)
 
 ## <a name="completed-sample"></a>Пример завершен
@@ -30,13 +30,13 @@
 
 |        Роли         |                            Authors (s)                             |
 | -------------------- | ---------------------------------------------------------------- |
-| Лабораторные руководства и слайды | Эндрю Коннелл (Майкрософт MVP, Воитанос)@andrewconnell          |
-| КОНТРОЛЯ                   | Юлия Турнер (Майкрософт MVP, Sympraxis консультационные услуги)@juliemturner |
-| Спонсор и поддержка    | Инаные (Майкрософт)@yinaa                                   |
+| Лабораторные руководства и слайды | Эндрю Коннелл (Майкрософт MVP, Воитанос) @andrewconnell          |
+| КОНТРОЛЯ                   | Юлия Турнер (Майкрософт MVP, Sympraxis консультационные услуги) @juliemturner |
+| Спонсор и поддержка    | Ина (Майкрософт) @yinaa                                   |
 
 ## <a name="version-history"></a>Журнал версий
 
-| Версия |        Дата        |                       Comments                       |
+| Version |        Дата        |                       Comments                       |
 | ------- | ------------------ | ---------------------------------------------------- |
 | 1.7     | 4 апреля 2018 г.      | Обновление содержимого 2019Q3                               |
 | 1.6     | 18 декабря 2018 г.  | Обновление содержимого 2019Q2                               |
