@@ -1,8 +1,8 @@
 <!-- markdownlint-disable MD002 MD041 -->
 
-<span data-ttu-id="5bf79-101">В этом упражнении вы будете расширяем приложение из предыдущего упражнения для поддержки проверки подлинности с помощью Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5bf79-101">In this exercise you will extend the application from the previous exercise to support authentication with Azure AD.</span></span> <span data-ttu-id="5bf79-102">Это необходимо для получения необходимого маркера доступа OAuth для вызова Microsoft Graph.</span><span class="sxs-lookup"><span data-stu-id="5bf79-102">This is required to obtain the necessary OAuth access token to call the Microsoft Graph.</span></span> <span data-ttu-id="5bf79-103">На этом этапе выполняется интеграция промежуточного слоя OWIN и библиотеки [библиотеки проверки подлинности Майкрософт](https://www.nuget.org/packages/Microsoft.Identity.Client/) в приложение.</span><span class="sxs-lookup"><span data-stu-id="5bf79-103">In this step you will integrate the OWIN middleware and the [Microsoft Authentication Library](https://www.nuget.org/packages/Microsoft.Identity.Client/) library into the application.</span></span>
+<span data-ttu-id="b72fa-101">В этом упражнении вы будете расширяем приложение из предыдущего упражнения для поддержки проверки подлинности с помощью Azure AD.</span><span class="sxs-lookup"><span data-stu-id="b72fa-101">In this exercise you will extend the application from the previous exercise to support authentication with Azure AD.</span></span> <span data-ttu-id="b72fa-102">Это необходимо для получения необходимого маркера доступа OAuth для вызова Microsoft Graph.</span><span class="sxs-lookup"><span data-stu-id="b72fa-102">This is required to obtain the necessary OAuth access token to call the Microsoft Graph.</span></span> <span data-ttu-id="b72fa-103">На этом этапе выполняется интеграция промежуточного слоя OWIN и библиотеки [библиотеки проверки подлинности Майкрософт](https://www.nuget.org/packages/Microsoft.Identity.Client/) в приложение.</span><span class="sxs-lookup"><span data-stu-id="b72fa-103">In this step you will integrate the OWIN middleware and the [Microsoft Authentication Library](https://www.nuget.org/packages/Microsoft.Identity.Client/) library into the application.</span></span>
 
-<span data-ttu-id="5bf79-104">Щелкните правой кнопкой мыши проект **Graph – Tutorial** в обозревателе решений и выберите команду **Добавить _гт_ новый элемент..**.. Выберите **файл веб-конфигурации**, назовите `PrivateSettings.config` файл и нажмите кнопку **добавить**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-104">Right-click the **graph-tutorial** project in Solution Explorer and choose **Add > New Item...**. Choose **Web Configuration File**, name the file `PrivateSettings.config` and choose **Add**.</span></span> <span data-ttu-id="5bf79-105">Замените все его содержимое указанным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-105">Replace its entire contents with the following code.</span></span>
+<span data-ttu-id="b72fa-104">Щелкните правой кнопкой мыши проект **Graph – Tutorial** в обозревателе решений и выберите команду **Добавить > новый элемент..**.. Выберите **файл веб-конфигурации**, назовите `PrivateSettings.config` файл и нажмите кнопку **добавить**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-104">Right-click the **graph-tutorial** project in Solution Explorer and choose **Add > New Item...**. Choose **Web Configuration File**, name the file `PrivateSettings.config` and choose **Add**.</span></span> <span data-ttu-id="b72fa-105">Замените все его содержимое указанным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-105">Replace its entire contents with the following code.</span></span>
 
 ```xml
 <appSettings>
@@ -13,20 +13,20 @@
 </appSettings>
 ```
 
-<span data-ttu-id="5bf79-106">Замените `YOUR_APP_ID_HERE` идентификатором приложения на портале регистрации приложений и замените `YOUR_APP_PASSWORD_HERE` на созданный секрет клиента.</span><span class="sxs-lookup"><span data-stu-id="5bf79-106">Replace `YOUR_APP_ID_HERE` with the application ID from the Application Registration Portal, and replace `YOUR_APP_PASSWORD_HERE` with the client secret you generated.</span></span> <span data-ttu-id="5bf79-107">Если ваш секрет клиента содержит амперсанд (`&`), не забудьте заменить их `&amp;` на в. `PrivateSettings.config`</span><span class="sxs-lookup"><span data-stu-id="5bf79-107">If your client secret contains any ampersands (`&`), be sure to replace them with `&amp;` in `PrivateSettings.config`.</span></span> <span data-ttu-id="5bf79-108">Кроме того, необходимо изменить `PORT` значение свойства в `ida:RedirectUri` соответствии с URL-адресом приложения.</span><span class="sxs-lookup"><span data-stu-id="5bf79-108">Also be sure to modify the `PORT` value for the `ida:RedirectUri` to match your application's URL.</span></span>
+<span data-ttu-id="b72fa-106">Замените `YOUR_APP_ID_HERE` идентификатором приложения на портале регистрации приложений и замените `YOUR_APP_PASSWORD_HERE` на созданный секрет клиента.</span><span class="sxs-lookup"><span data-stu-id="b72fa-106">Replace `YOUR_APP_ID_HERE` with the application ID from the Application Registration Portal, and replace `YOUR_APP_PASSWORD_HERE` with the client secret you generated.</span></span> <span data-ttu-id="b72fa-107">Если ваш секрет клиента содержит амперсанд (`&`), не забудьте заменить их `&amp;` на в. `PrivateSettings.config`</span><span class="sxs-lookup"><span data-stu-id="b72fa-107">If your client secret contains any ampersands (`&`), be sure to replace them with `&amp;` in `PrivateSettings.config`.</span></span> <span data-ttu-id="b72fa-108">Кроме того, необходимо изменить `PORT` значение свойства в `ida:RedirectUri` соответствии с URL-адресом приложения.</span><span class="sxs-lookup"><span data-stu-id="b72fa-108">Also be sure to modify the `PORT` value for the `ida:RedirectUri` to match your application's URL.</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="5bf79-109">Если вы используете систему управления версиями (например, Git), то в дальнейшем будет полезно исключить `PrivateSettings.config` файл из системы управления версиями, чтобы избежать непреднамеренного утечки идентификатора и пароля приложения.</span><span class="sxs-lookup"><span data-stu-id="5bf79-109">If you're using source control such as git, now would be a good time to exclude the `PrivateSettings.config` file from source control to avoid inadvertently leaking your app ID and password.</span></span>
+> <span data-ttu-id="b72fa-109">Если вы используете систему управления версиями (например, Git), то в дальнейшем будет полезно исключить `PrivateSettings.config` файл из системы управления версиями, чтобы избежать непреднамеренного утечки идентификатора и пароля приложения.</span><span class="sxs-lookup"><span data-stu-id="b72fa-109">If you're using source control such as git, now would be a good time to exclude the `PrivateSettings.config` file from source control to avoid inadvertently leaking your app ID and password.</span></span>
 
-<span data-ttu-id="5bf79-110">Обновление `Web.config` для загрузки нового файла.</span><span class="sxs-lookup"><span data-stu-id="5bf79-110">Update `Web.config` to load this new file.</span></span> <span data-ttu-id="5bf79-111">`<appSettings>` Замените строку 7 на приведенную ниже строку.</span><span class="sxs-lookup"><span data-stu-id="5bf79-111">Replace the `<appSettings>` (line 7) with the following</span></span>
+<span data-ttu-id="b72fa-110">Обновление `Web.config` для загрузки нового файла.</span><span class="sxs-lookup"><span data-stu-id="b72fa-110">Update `Web.config` to load this new file.</span></span> <span data-ttu-id="b72fa-111">`<appSettings>` Замените строку 7 на приведенную ниже строку.</span><span class="sxs-lookup"><span data-stu-id="b72fa-111">Replace the `<appSettings>` (line 7) with the following</span></span>
 
 ```xml
 <appSettings file="PrivateSettings.config">
 ```
 
-## <a name="implement-sign-in"></a><span data-ttu-id="5bf79-112">Реализация входа</span><span class="sxs-lookup"><span data-stu-id="5bf79-112">Implement sign-in</span></span>
+## <a name="implement-sign-in"></a><span data-ttu-id="b72fa-112">Реализация входа</span><span class="sxs-lookup"><span data-stu-id="b72fa-112">Implement sign-in</span></span>
 
-<span data-ttu-id="5bf79-113">Начните с инициализации промежуточного слоя OWIN для использования проверки подлинности Azure AD для приложения.</span><span class="sxs-lookup"><span data-stu-id="5bf79-113">Start by initializing the OWIN middleware to use Azure AD authentication for the app.</span></span> <span data-ttu-id="5bf79-114">Щелкните правой кнопкой мыши папку **апп_старт** в обозревателе решений и выберите команду **Добавить класс _гт_..**.. Присвойте файлу `Startup.Auth.cs` имя и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-114">Right-click the **App_Start** folder in Solution Explorer and choose **Add > Class...**. Name the file `Startup.Auth.cs` and choose **Add**.</span></span> <span data-ttu-id="5bf79-115">Замените все содержимое приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-115">Replace the entire contents with the following code.</span></span>
+<span data-ttu-id="b72fa-113">Начните с инициализации промежуточного слоя OWIN для использования проверки подлинности Azure AD для приложения.</span><span class="sxs-lookup"><span data-stu-id="b72fa-113">Start by initializing the OWIN middleware to use Azure AD authentication for the app.</span></span> <span data-ttu-id="b72fa-114">Щелкните правой кнопкой мыши папку **апп_старт** в обозревателе решений и выберите команду **Добавить класс >..**.. Присвойте файлу `Startup.Auth.cs` имя и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-114">Right-click the **App_Start** folder in Solution Explorer and choose **Add > Class...**. Name the file `Startup.Auth.cs` and choose **Add**.</span></span> <span data-ttu-id="b72fa-115">Замените все содержимое приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-115">Replace the entire contents with the following code.</span></span>
 
 ```cs
 using Microsoft.Identity.Client;
@@ -109,8 +109,10 @@ namespace graph_tutorial
 
         private async Task OnAuthorizationCodeReceivedAsync(AuthorizationCodeReceivedNotification notification)
         {
-            var idClient = new ConfidentialClientApplication(
-                appId, redirectUri, new ClientCredential(appSecret), null, null);
+            var idClient = ConfidentialClientApplicationBuilder.Create(appId)
+                .WithRedirectUri(redirectUri)
+                .WithClientSecret(appSecret)
+                .Build();
 
             string message;
             string debug;
@@ -119,8 +121,8 @@ namespace graph_tutorial
             {
                 string[] scopes = graphScopes.Split(' ');
 
-                var result = await idClient.AcquireTokenByAuthorizationCodeAsync(
-                    notification.Code, scopes);
+                var result = await idClient.AcquireTokenByAuthorizationCode(
+                    scopes, notification.Code).ExecuteAsync();
 
                 message = "Access token retrieved.";
                 debug = result.AccessToken;
@@ -138,9 +140,9 @@ namespace graph_tutorial
 }
 ```
 
-<span data-ttu-id="5bf79-116">Этот код настраивает промежуточный по OWIN со значениями из `PrivateSettings.config` и определяет два метода обратного `OnAuthenticationFailedAsync` вызова `OnAuthorizationCodeReceivedAsync`и.</span><span class="sxs-lookup"><span data-stu-id="5bf79-116">This code configures the OWIN middleware with the values from `PrivateSettings.config` and defines two callback methods, `OnAuthenticationFailedAsync` and `OnAuthorizationCodeReceivedAsync`.</span></span> <span data-ttu-id="5bf79-117">Эти методы обратного вызова будут вызываться при возвращении процесса входа из Azure.</span><span class="sxs-lookup"><span data-stu-id="5bf79-117">These callback methods will be invoked when the sign-in process returns from Azure.</span></span>
+<span data-ttu-id="b72fa-116">Этот код настраивает промежуточный по OWIN со значениями из `PrivateSettings.config` и определяет два метода обратного `OnAuthenticationFailedAsync` вызова `OnAuthorizationCodeReceivedAsync`и.</span><span class="sxs-lookup"><span data-stu-id="b72fa-116">This code configures the OWIN middleware with the values from `PrivateSettings.config` and defines two callback methods, `OnAuthenticationFailedAsync` and `OnAuthorizationCodeReceivedAsync`.</span></span> <span data-ttu-id="b72fa-117">Эти методы обратного вызова будут вызываться при возвращении процесса входа из Azure.</span><span class="sxs-lookup"><span data-stu-id="b72fa-117">These callback methods will be invoked when the sign-in process returns from Azure.</span></span>
 
-<span data-ttu-id="5bf79-118">Теперь обновите `Startup.cs` файл, чтобы вызвать `ConfigureAuth` метод.</span><span class="sxs-lookup"><span data-stu-id="5bf79-118">Now update the `Startup.cs` file to call the `ConfigureAuth` method.</span></span> <span data-ttu-id="5bf79-119">Замените все содержимое `Startup.cs` приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-119">Replace the entire contents of `Startup.cs` with the following code.</span></span>
+<span data-ttu-id="b72fa-118">Теперь обновите `Startup.cs` файл, чтобы вызвать `ConfigureAuth` метод.</span><span class="sxs-lookup"><span data-stu-id="b72fa-118">Now update the `Startup.cs` file to call the `ConfigureAuth` method.</span></span> <span data-ttu-id="b72fa-119">Замените все содержимое `Startup.cs` приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-119">Replace the entire contents of `Startup.cs` with the following code.</span></span>
 
 ```cs
 using Microsoft.Owin;
@@ -160,7 +162,7 @@ namespace graph_tutorial
 }
 ```
 
-<span data-ttu-id="5bf79-120">Добавьте в `Error` `HomeController` класс действие, чтобы преобразовать `message` параметры `debug` запроса в `Alert` объект.</span><span class="sxs-lookup"><span data-stu-id="5bf79-120">Add an `Error` action to the `HomeController` class to transform the `message` and `debug` query parameters into an `Alert` object.</span></span> <span data-ttu-id="5bf79-121">Откройте `Controllers/HomeController.cs` и добавьте указанную ниже функцию.</span><span class="sxs-lookup"><span data-stu-id="5bf79-121">Open `Controllers/HomeController.cs` and add the following function.</span></span>
+<span data-ttu-id="b72fa-120">Добавьте в `Error` `HomeController` класс действие, чтобы преобразовать `message` параметры `debug` запроса в `Alert` объект.</span><span class="sxs-lookup"><span data-stu-id="b72fa-120">Add an `Error` action to the `HomeController` class to transform the `message` and `debug` query parameters into an `Alert` object.</span></span> <span data-ttu-id="b72fa-121">Откройте `Controllers/HomeController.cs` и добавьте указанную ниже функцию.</span><span class="sxs-lookup"><span data-stu-id="b72fa-121">Open `Controllers/HomeController.cs` and add the following function.</span></span>
 
 ```cs
 public ActionResult Error(string message, string debug)
@@ -170,7 +172,7 @@ public ActionResult Error(string message, string debug)
 }
 ```
 
-<span data-ttu-id="5bf79-122">Добавление контроллера для обработки входа.</span><span class="sxs-lookup"><span data-stu-id="5bf79-122">Add a controller to handle sign-in.</span></span> <span data-ttu-id="5bf79-123">Щелкните правой кнопкой мыши \*\*\*\* папку Controllers в обозревателе решений и выберите команду **Добавить контроллер _гт_..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-123">Right-click the **Controllers** folder in Solution Explorer and choose **Add > Controller...**. Choose **MVC 5 Controller - Empty** and choose **Add**.</span></span> <span data-ttu-id="5bf79-124">Назовите контроллер `AccountController` и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-124">Name the controller `AccountController` and choose **Add**.</span></span> <span data-ttu-id="5bf79-125">Замените все содержимое файла приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-125">Replace the entire contents of the file with the following code.</span></span>
+<span data-ttu-id="b72fa-122">Добавление контроллера для обработки входа.</span><span class="sxs-lookup"><span data-stu-id="b72fa-122">Add a controller to handle sign-in.</span></span> <span data-ttu-id="b72fa-123">Щелкните правой кнопкой мыши \*\*\*\* папку Controllers в обозревателе решений и выберите **Добавить контроллер >..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-123">Right-click the **Controllers** folder in Solution Explorer and choose **Add > Controller...**. Choose **MVC 5 Controller - Empty** and choose **Add**.</span></span> <span data-ttu-id="b72fa-124">Назовите контроллер `AccountController` и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-124">Name the controller `AccountController` and choose **Add**.</span></span> <span data-ttu-id="b72fa-125">Замените все содержимое файла приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-125">Replace the entire contents of the file with the following code.</span></span>
 
 ```cs
 using Microsoft.Owin.Security;
@@ -209,13 +211,13 @@ namespace graph_tutorial.Controllers
 }
 ```
 
-<span data-ttu-id="5bf79-126">Это определяет действие `SignIn` и `SignOut` действие.</span><span class="sxs-lookup"><span data-stu-id="5bf79-126">This defines a `SignIn` and `SignOut` action.</span></span> <span data-ttu-id="5bf79-127">`SignIn` Действие проверяет, был ли запрос уже прошел проверку подлинности.</span><span class="sxs-lookup"><span data-stu-id="5bf79-127">The `SignIn` action checks if the request is already authenticated.</span></span> <span data-ttu-id="5bf79-128">В противном случае он вызывает промежуточный по OWIN для проверки подлинности пользователя.</span><span class="sxs-lookup"><span data-stu-id="5bf79-128">If not, it invokes the OWIN middleware to authenticate the user.</span></span> <span data-ttu-id="5bf79-129">`SignOut` Действие вызывает промежуточный по OWIN для выхода.</span><span class="sxs-lookup"><span data-stu-id="5bf79-129">The `SignOut` action invokes the OWIN middleware to sign out.</span></span>
+<span data-ttu-id="b72fa-126">Это определяет действие `SignIn` и `SignOut` действие.</span><span class="sxs-lookup"><span data-stu-id="b72fa-126">This defines a `SignIn` and `SignOut` action.</span></span> <span data-ttu-id="b72fa-127">`SignIn` Действие проверяет, был ли запрос уже прошел проверку подлинности.</span><span class="sxs-lookup"><span data-stu-id="b72fa-127">The `SignIn` action checks if the request is already authenticated.</span></span> <span data-ttu-id="b72fa-128">В противном случае он вызывает промежуточный по OWIN для проверки подлинности пользователя.</span><span class="sxs-lookup"><span data-stu-id="b72fa-128">If not, it invokes the OWIN middleware to authenticate the user.</span></span> <span data-ttu-id="b72fa-129">`SignOut` Действие вызывает промежуточный по OWIN для выхода.</span><span class="sxs-lookup"><span data-stu-id="b72fa-129">The `SignOut` action invokes the OWIN middleware to sign out.</span></span>
 
-<span data-ttu-id="5bf79-130">Сохраните изменения и запустите проект.</span><span class="sxs-lookup"><span data-stu-id="5bf79-130">Save your changes and start the project.</span></span> <span data-ttu-id="5bf79-131">Нажмите кнопку входа, и вы будете перенаправлены на `https://login.microsoftonline.com`.</span><span class="sxs-lookup"><span data-stu-id="5bf79-131">Click the sign-in button and you should be redirected to `https://login.microsoftonline.com`.</span></span> <span data-ttu-id="5bf79-132">Войдите с помощью учетной записи Майкрософт и согласия с запрошенными разрешениями.</span><span class="sxs-lookup"><span data-stu-id="5bf79-132">Login with your Microsoft account and consent to the requested permissions.</span></span> <span data-ttu-id="5bf79-133">Браузер перенаправляется на приложение, отображая маркер.</span><span class="sxs-lookup"><span data-stu-id="5bf79-133">The browser redirects to the app, showing the token.</span></span>
+<span data-ttu-id="b72fa-130">Сохраните изменения и запустите проект.</span><span class="sxs-lookup"><span data-stu-id="b72fa-130">Save your changes and start the project.</span></span> <span data-ttu-id="b72fa-131">Нажмите кнопку входа, и вы будете перенаправлены на `https://login.microsoftonline.com`.</span><span class="sxs-lookup"><span data-stu-id="b72fa-131">Click the sign-in button and you should be redirected to `https://login.microsoftonline.com`.</span></span> <span data-ttu-id="b72fa-132">Войдите с помощью учетной записи Майкрософт и согласия с запрошенными разрешениями.</span><span class="sxs-lookup"><span data-stu-id="b72fa-132">Login with your Microsoft account and consent to the requested permissions.</span></span> <span data-ttu-id="b72fa-133">Браузер перенаправляется на приложение, отображая маркер.</span><span class="sxs-lookup"><span data-stu-id="b72fa-133">The browser redirects to the app, showing the token.</span></span>
 
-### <a name="get-user-details"></a><span data-ttu-id="5bf79-134">Получение сведений о пользователе</span><span class="sxs-lookup"><span data-stu-id="5bf79-134">Get user details</span></span>
+### <a name="get-user-details"></a><span data-ttu-id="b72fa-134">Получение сведений о пользователе</span><span class="sxs-lookup"><span data-stu-id="b72fa-134">Get user details</span></span>
 
-<span data-ttu-id="5bf79-135">Начните с создания нового файла, в котором будет храниться весь набор вызовов Microsoft Graph.</span><span class="sxs-lookup"><span data-stu-id="5bf79-135">Start by creating a new file to hold all of your Microsoft Graph calls.</span></span> <span data-ttu-id="5bf79-136">Щелкните правой кнопкой мыши папку **Graph – Tutorial** в обозревателе решений и выберите команду **Добавить _гт_ новую папку**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-136">Right-click the **graph-tutorial** folder in Solution Explorer, and choose **Add > New Folder**.</span></span> <span data-ttu-id="5bf79-137">Назовите папку `Helpers`.</span><span class="sxs-lookup"><span data-stu-id="5bf79-137">Name the folder `Helpers`.</span></span> <span data-ttu-id="5bf79-138">Щелкните новую папку правой кнопкой мыши и выберите команду **Добавить класс _гт_..**.. Присвойте файлу `GraphHelper.cs` имя и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-138">Right click this new folder and choose **Add > Class...**. Name the file `GraphHelper.cs` and choose **Add**.</span></span> <span data-ttu-id="5bf79-139">Замените содержимое этого файла приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-139">Replace the contents of this file with the following code.</span></span>
+<span data-ttu-id="b72fa-135">Начните с создания нового файла, в котором будет храниться весь набор вызовов Microsoft Graph.</span><span class="sxs-lookup"><span data-stu-id="b72fa-135">Start by creating a new file to hold all of your Microsoft Graph calls.</span></span> <span data-ttu-id="b72fa-136">Щелкните правой кнопкой мыши папку **Graph – Tutorial** в обозревателе решений и выберите команду **Добавить > создать папку**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-136">Right-click the **graph-tutorial** folder in Solution Explorer, and choose **Add > New Folder**.</span></span> <span data-ttu-id="b72fa-137">Назовите папку `Helpers`.</span><span class="sxs-lookup"><span data-stu-id="b72fa-137">Name the folder `Helpers`.</span></span> <span data-ttu-id="b72fa-138">Щелкните новую папку правой кнопкой мыши и выберите команду **добавить > класс..**.. Присвойте файлу `GraphHelper.cs` имя и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-138">Right click this new folder and choose **Add > Class...**. Name the file `GraphHelper.cs` and choose **Add**.</span></span> <span data-ttu-id="b72fa-139">Замените содержимое этого файла приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-139">Replace the contents of this file with the following code.</span></span>
 
 ```cs
 using Microsoft.Graph;
@@ -242,23 +244,23 @@ namespace graph_tutorial.Helpers
 }
 ```
 
-<span data-ttu-id="5bf79-140">При этом реализуется `GetUserDetails` функция, которая использует пакет SDK Microsoft Graph для вызова `/me` конечной точки и возврата результата.</span><span class="sxs-lookup"><span data-stu-id="5bf79-140">This implements the `GetUserDetails` function, which uses the Microsoft Graph SDK to call the `/me` endpoint and return the result.</span></span>
+<span data-ttu-id="b72fa-140">При этом реализуется `GetUserDetails` функция, которая использует пакет SDK Microsoft Graph для вызова `/me` конечной точки и возврата результата.</span><span class="sxs-lookup"><span data-stu-id="b72fa-140">This implements the `GetUserDetails` function, which uses the Microsoft Graph SDK to call the `/me` endpoint and return the result.</span></span>
 
-<span data-ttu-id="5bf79-141">Обновите `OnAuthorizationCodeReceivedAsync` метод в `App_Start/Startup.Auth.cs` методе, чтобы вызвать эту функцию.</span><span class="sxs-lookup"><span data-stu-id="5bf79-141">Update the `OnAuthorizationCodeReceivedAsync` method in `App_Start/Startup.Auth.cs` to call this function.</span></span> <span data-ttu-id="5bf79-142">Сначала добавьте следующий `using` оператор в начало файла.</span><span class="sxs-lookup"><span data-stu-id="5bf79-142">First, add the following `using` statement to the top of the file.</span></span>
+<span data-ttu-id="b72fa-141">Обновите `OnAuthorizationCodeReceivedAsync` метод в `App_Start/Startup.Auth.cs` методе, чтобы вызвать эту функцию.</span><span class="sxs-lookup"><span data-stu-id="b72fa-141">Update the `OnAuthorizationCodeReceivedAsync` method in `App_Start/Startup.Auth.cs` to call this function.</span></span> <span data-ttu-id="b72fa-142">Сначала добавьте следующий `using` оператор в начало файла.</span><span class="sxs-lookup"><span data-stu-id="b72fa-142">First, add the following `using` statement to the top of the file.</span></span>
 
 ```cs
 using graph_tutorial.Helpers;
 ```
 
-<span data-ttu-id="5bf79-143">Замените существующий `try` блок на `OnAuthorizationCodeReceivedAsync` приведенный ниже код.</span><span class="sxs-lookup"><span data-stu-id="5bf79-143">Replace the existing `try` block in `OnAuthorizationCodeReceivedAsync` with the following code.</span></span>
+<span data-ttu-id="b72fa-143">Замените существующий `try` блок на `OnAuthorizationCodeReceivedAsync` приведенный ниже код.</span><span class="sxs-lookup"><span data-stu-id="b72fa-143">Replace the existing `try` block in `OnAuthorizationCodeReceivedAsync` with the following code.</span></span>
 
 ```cs
 try
 {
     string[] scopes = graphScopes.Split(' ');
 
-    var result = await idClient.AcquireTokenByAuthorizationCodeAsync(
-        notification.Code, scopes);
+    var result = await idClient.AcquireTokenByAuthorizationCode(
+        scopes, notification.Code).ExecuteAsync();
 
     var userDetails = await GraphHelper.GetUserDetailsAsync(result.AccessToken);
 
@@ -270,17 +272,18 @@ try
 }
 ```
 
-<span data-ttu-id="5bf79-144">Теперь, если вы сохраните изменения и запустите приложение, после входа вы увидите имя пользователя и адрес электронной почты, а не маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="5bf79-144">Now if you save your changes and start the app, after sign-in you should see the user's name and email address instead of the access token.</span></span>
+<span data-ttu-id="b72fa-144">Теперь, если вы сохраните изменения и запустите приложение, после входа вы увидите имя пользователя и адрес электронной почты, а не маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="b72fa-144">Now if you save your changes and start the app, after sign-in you should see the user's name and email address instead of the access token.</span></span>
 
-## <a name="storing-the-tokens"></a><span data-ttu-id="5bf79-145">Сохранение маркеров</span><span class="sxs-lookup"><span data-stu-id="5bf79-145">Storing the tokens</span></span>
+## <a name="storing-the-tokens"></a><span data-ttu-id="b72fa-145">Сохранение маркеров</span><span class="sxs-lookup"><span data-stu-id="b72fa-145">Storing the tokens</span></span>
 
-<span data-ttu-id="5bf79-146">Теперь, когда вы можете получить маркеры, следует реализовать способ их хранения в приложении.</span><span class="sxs-lookup"><span data-stu-id="5bf79-146">Now that you can get tokens, it's time to implement a way to store them in the app.</span></span> <span data-ttu-id="5bf79-147">Так как это пример приложения, мы будем использовать сеанс для хранения маркеров.</span><span class="sxs-lookup"><span data-stu-id="5bf79-147">Since this is a sample app, we'll use the session to store the tokens.</span></span> <span data-ttu-id="5bf79-148">Реальное приложение использует более надежное решение для безопасного хранения, например базу данных.</span><span class="sxs-lookup"><span data-stu-id="5bf79-148">A real-world app would use a more reliable secure storage solution, like a database.</span></span>
+<span data-ttu-id="b72fa-146">Теперь, когда вы можете получить маркеры, следует реализовать способ их хранения в приложении.</span><span class="sxs-lookup"><span data-stu-id="b72fa-146">Now that you can get tokens, it's time to implement a way to store them in the app.</span></span> <span data-ttu-id="b72fa-147">Так как это пример приложения, мы будем использовать сеанс для хранения маркеров.</span><span class="sxs-lookup"><span data-stu-id="b72fa-147">Since this is a sample app, we'll use the session to store the tokens.</span></span> <span data-ttu-id="b72fa-148">Реальное приложение использует более надежное решение для безопасного хранения, например базу данных.</span><span class="sxs-lookup"><span data-stu-id="b72fa-148">A real-world app would use a more reliable secure storage solution, like a database.</span></span>
 
-<span data-ttu-id="5bf79-149">Щелкните правой кнопкой мыши папку **Graph – Tutorial** в обозревателе решений и выберите команду **Добавить _гт_ новую папку**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-149">Right-click the **graph-tutorial** folder in Solution Explorer, and choose **Add > New Folder**.</span></span> <span data-ttu-id="5bf79-150">Назовите папку `TokenStorage`.</span><span class="sxs-lookup"><span data-stu-id="5bf79-150">Name the folder `TokenStorage`.</span></span> <span data-ttu-id="5bf79-151">Щелкните новую папку правой кнопкой мыши и выберите команду **Добавить класс _гт_..**.. Присвойте файлу `SessionTokenStore.cs` имя и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="5bf79-151">Right click this new folder and choose **Add > Class...**. Name the file `SessionTokenStore.cs` and choose **Add**.</span></span> <span data-ttu-id="5bf79-152">Замените содержимое этого файла приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-152">Replace the contents of this file with the following code.</span></span>
+<span data-ttu-id="b72fa-149">Щелкните правой кнопкой мыши папку **Graph – Tutorial** в обозревателе решений и выберите команду **Добавить > создать папку**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-149">Right-click the **graph-tutorial** folder in Solution Explorer, and choose **Add > New Folder**.</span></span> <span data-ttu-id="b72fa-150">Назовите папку `TokenStorage`.</span><span class="sxs-lookup"><span data-stu-id="b72fa-150">Name the folder `TokenStorage`.</span></span> <span data-ttu-id="b72fa-151">Щелкните новую папку правой кнопкой мыши и выберите команду **добавить > класс..**.. Присвойте файлу `SessionTokenStore.cs` имя и нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="b72fa-151">Right click this new folder and choose **Add > Class...**. Name the file `SessionTokenStore.cs` and choose **Add**.</span></span> <span data-ttu-id="b72fa-152">Замените содержимое этого файла приведенным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-152">Replace the contents of this file with the following code.</span></span>
 
 ```cs
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using System.Threading;
 using System.Web;
 
@@ -297,29 +300,28 @@ namespace graph_tutorial.TokenStorage
     // Adapted from https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-v2
     public class SessionTokenStore
     {
-        private static ReaderWriterLockSlim sessionLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+        private static readonly ReaderWriterLockSlim sessionLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+
         private readonly string userId = string.Empty;
         private readonly string cacheId = string.Empty;
         private readonly string cachedUserId = string.Empty;
-        private HttpContextBase httpContext = null;
+        private HttpContext httpContext = null;
+        private ITokenCache tokenCache;
 
-        TokenCache tokenCache = new TokenCache();
-
-        public SessionTokenStore(string userId, HttpContextBase httpContext)
+        public SessionTokenStore(string userId, HttpContext httpcontext)
         {
             this.userId = userId;
-            cacheId = $"{userId}_TokenCache";
-            cachedUserId = $"{userId}_UserCache";
-            this.httpContext = httpContext;
-            Load();
+            this.cacheId = $"{userId}_TokenCache";
+            this.cachedUserId = $"{userId}_UserCache";
+            this.httpContext = httpcontext;
         }
 
-        public TokenCache GetMsalCacheInstance()
+        public void Initialize(ITokenCache tokenCache)
         {
-            tokenCache.SetBeforeAccess(BeforeAccessNotification);
-            tokenCache.SetAfterAccess(AfterAccessNotification);
+            this.tokenCache = tokenCache;
+            this.tokenCache.SetBeforeAccess(BeforeAccessNotification);
+            this.tokenCache.SetAfterAccess(AfterAccessNotification);
             Load();
-            return tokenCache;
         }
 
         public bool HasData()
@@ -335,28 +337,24 @@ namespace graph_tutorial.TokenStorage
         private void Load()
         {
             sessionLock.EnterReadLock();
-            tokenCache.Deserialize((byte[])httpContext.Session[cacheId]);
+            tokenCache.DeserializeMsalV3((byte[])httpContext.Session[cacheId]);
             sessionLock.ExitReadLock();
         }
 
         private void Persist()
         {
             sessionLock.EnterReadLock();
-            httpContext.Session[cacheId] = tokenCache.Serialize();
+            httpContext.Session[cacheId] = tokenCache.SerializeMsalV3();
             sessionLock.ExitReadLock();
         }
 
-        // Triggered right before MSAL needs to access the cache.
         private void BeforeAccessNotification(TokenCacheNotificationArgs args)
         {
-            // Reload the cache from the persistent store in case it changed since the last access.
             Load();
         }
 
-        // Triggered right after MSAL accessed the cache.
         private void AfterAccessNotification(TokenCacheNotificationArgs args)
         {
-            // if the access operation resulted in a cache update
             if (args.HasStateChanged)
             {
                 Persist();
@@ -381,34 +379,35 @@ namespace graph_tutorial.TokenStorage
 }
 ```
 
-<span data-ttu-id="5bf79-153">Этот код создает `SessionTokenStore` класс, работающий с `TokenCache` классом библиотеки MSAL.</span><span class="sxs-lookup"><span data-stu-id="5bf79-153">This code creates a `SessionTokenStore` class that works with the MSAL library's `TokenCache` class.</span></span> <span data-ttu-id="5bf79-154">В большинстве кода здесь `TokenCache` описывается сериализация и десериализация для сеанса.</span><span class="sxs-lookup"><span data-stu-id="5bf79-154">Most of the code here involves serializing and deserializing the `TokenCache` to the session.</span></span> <span data-ttu-id="5bf79-155">Кроме того, он предоставляет класс и методы для сериализации и десериализации сведений о пользователе в сеансе.</span><span class="sxs-lookup"><span data-stu-id="5bf79-155">It also provides a class and methods to serialize and deserialize the user's details to the session.</span></span>
+<span data-ttu-id="b72fa-153">Этот код создает `SessionTokenStore` класс, работающий с `TokenCache` классом библиотеки MSAL.</span><span class="sxs-lookup"><span data-stu-id="b72fa-153">This code creates a `SessionTokenStore` class that works with the MSAL library's `TokenCache` class.</span></span> <span data-ttu-id="b72fa-154">В большинстве кода здесь `TokenCache` описывается сериализация и десериализация для сеанса.</span><span class="sxs-lookup"><span data-stu-id="b72fa-154">Most of the code here involves serializing and deserializing the `TokenCache` to the session.</span></span> <span data-ttu-id="b72fa-155">Кроме того, он предоставляет класс и методы для сериализации и десериализации сведений о пользователе в сеансе.</span><span class="sxs-lookup"><span data-stu-id="b72fa-155">It also provides a class and methods to serialize and deserialize the user's details to the session.</span></span>
 
-<span data-ttu-id="5bf79-156">Теперь добавьте приведенный ниже `using` оператор в начало `App_Start/Startup.Auth.cs` файла.</span><span class="sxs-lookup"><span data-stu-id="5bf79-156">Now, add the following `using` statement to the top of the `App_Start/Startup.Auth.cs` file.</span></span>
+<span data-ttu-id="b72fa-156">Теперь добавьте приведенный ниже `using` оператор в начало `App_Start/Startup.Auth.cs` файла.</span><span class="sxs-lookup"><span data-stu-id="b72fa-156">Now, add the following `using` statement to the top of the `App_Start/Startup.Auth.cs` file.</span></span>
 
 ```cs
 using graph_tutorial.TokenStorage;
 using System.IdentityModel.Claims;
 ```
 
-<span data-ttu-id="5bf79-157">Теперь обновите `OnAuthorizationCodeReceivedAsync` функцию, чтобы создать экземпляр `SessionTokenStore` класса и предоставить конструктору для `ConfidentialClientApplication` объекта.</span><span class="sxs-lookup"><span data-stu-id="5bf79-157">Now update the `OnAuthorizationCodeReceivedAsync` function to create an instance of the `SessionTokenStore` class and provide that to the constructor for the `ConfidentialClientApplication` object.</span></span> <span data-ttu-id="5bf79-158">Это приведет к тому, что MSAL использует реализацию кэша для хранения маркеров.</span><span class="sxs-lookup"><span data-stu-id="5bf79-158">That will cause MSAL to use your cache implementation for storing tokens.</span></span> <span data-ttu-id="5bf79-159">Замените имеющуюся функцию `OnAuthorizationCodeReceivedAsync` указанным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="5bf79-159">Replace the existing `OnAuthorizationCodeReceivedAsync` function with the following.</span></span>
+<span data-ttu-id="b72fa-157">Теперь обновите `OnAuthorizationCodeReceivedAsync` функцию, чтобы создать экземпляр `SessionTokenStore` класса и предоставить конструктору для `ConfidentialClientApplication` объекта.</span><span class="sxs-lookup"><span data-stu-id="b72fa-157">Now update the `OnAuthorizationCodeReceivedAsync` function to create an instance of the `SessionTokenStore` class and provide that to the constructor for the `ConfidentialClientApplication` object.</span></span> <span data-ttu-id="b72fa-158">Это приведет к тому, что MSAL использует реализацию кэша для хранения маркеров.</span><span class="sxs-lookup"><span data-stu-id="b72fa-158">That will cause MSAL to use your cache implementation for storing tokens.</span></span> <span data-ttu-id="b72fa-159">Замените имеющуюся функцию `OnAuthorizationCodeReceivedAsync` указанным ниже кодом.</span><span class="sxs-lookup"><span data-stu-id="b72fa-159">Replace the existing `OnAuthorizationCodeReceivedAsync` function with the following.</span></span>
 
 ```cs
 private async Task OnAuthorizationCodeReceivedAsync(AuthorizationCodeReceivedNotification notification)
 {
-    // Get the signed in user's id and create a token cache
-    string signedInUserId = notification.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
-    SessionTokenStore tokenStore = new SessionTokenStore(signedInUserId,
-        notification.OwinContext.Environment["System.Web.HttpContextBase"] as HttpContextBase);
+    var idClient = ConfidentialClientApplicationBuilder.Create(appId)
+        .WithRedirectUri(redirectUri)
+        .WithClientSecret(appSecret)
+        .Build();
 
-    var idClient = new ConfidentialClientApplication(
-        appId, redirectUri, new ClientCredential(appSecret), tokenStore.GetMsalCacheInstance(), null);
+    var signedInUserId = notification.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+    var tokenStore = new SessionTokenStore(signedInUserId, HttpContext.Current);
+    tokenStore.Initialize(idClient.UserTokenCache);
 
     try
     {
         string[] scopes = graphScopes.Split(' ');
 
-        var result = await idClient.AcquireTokenByAuthorizationCodeAsync(
-            notification.Code, scopes);
+        var result = await idClient.AcquireTokenByAuthorizationCode(
+            scopes, notification.Code).ExecuteAsync();
 
         var userDetails = await GraphHelper.GetUserDetailsAsync(result.AccessToken);
 
@@ -428,7 +427,7 @@ private async Task OnAuthorizationCodeReceivedAsync(AuthorizationCodeReceivedNot
         notification.HandleResponse();
         notification.Response.Redirect($"/Home/Error?message={message}&debug={ex.Message}");
     }
-    catch(Microsoft.Graph.ServiceException ex)
+    catch (Microsoft.Graph.ServiceException ex)
     {
         string message = "GetUserDetailsAsync threw an exception";
         notification.HandleResponse();
@@ -437,19 +436,19 @@ private async Task OnAuthorizationCodeReceivedAsync(AuthorizationCodeReceivedNot
 }
 ```
 
-<span data-ttu-id="5bf79-160">Чтобы обвести итог изменений:</span><span class="sxs-lookup"><span data-stu-id="5bf79-160">To summarize the changes:</span></span>
+<span data-ttu-id="b72fa-160">Чтобы обвести итог изменений:</span><span class="sxs-lookup"><span data-stu-id="b72fa-160">To summarize the changes:</span></span>
 
-- <span data-ttu-id="5bf79-161">Теперь код передает `TokenCache` объект конструктору `ConfidentialClientApplication`.</span><span class="sxs-lookup"><span data-stu-id="5bf79-161">The code now passes a `TokenCache` object to the constructor for `ConfidentialClientApplication`.</span></span> <span data-ttu-id="5bf79-162">Библиотека MSAL будет обрабатывать логику хранения маркеров и обновлять их при необходимости.</span><span class="sxs-lookup"><span data-stu-id="5bf79-162">The MSAL library will handle the logic of storing the tokens and refreshing it when needed.</span></span>
-- <span data-ttu-id="5bf79-163">Теперь код передает сведения о пользователях, полученные из Microsoft Graph, `SessionTokenStore` в объект, который будет храниться в сеансе.</span><span class="sxs-lookup"><span data-stu-id="5bf79-163">The code now passes the user details obtained from Microsoft Graph to the `SessionTokenStore` object to store in the session.</span></span>
-- <span data-ttu-id="5bf79-164">При успешном выполнении код не переправляется, он просто возвращает.</span><span class="sxs-lookup"><span data-stu-id="5bf79-164">On success, the code no longer redirects, it just returns.</span></span> <span data-ttu-id="5bf79-165">Это позволяет промежуточному по OWIN выполнить процесс проверки подлинности.</span><span class="sxs-lookup"><span data-stu-id="5bf79-165">This allows the OWIN middleware to complete the authentication process.</span></span>
+- <span data-ttu-id="b72fa-161">Теперь код заменяет `ConfidentialClientApplication`кэш маркеров пользователя по умолчанию экземпляром `SessionTokenStore`.</span><span class="sxs-lookup"><span data-stu-id="b72fa-161">The code now replaces the `ConfidentialClientApplication`'s default user token cache with an instance of the  `SessionTokenStore`.</span></span> <span data-ttu-id="b72fa-162">Библиотека MSAL будет обрабатывать логику хранения маркеров и обновлять их при необходимости.</span><span class="sxs-lookup"><span data-stu-id="b72fa-162">The MSAL library will handle the logic of storing the tokens and refreshing it when needed.</span></span>
+- <span data-ttu-id="b72fa-163">Теперь код передает сведения о пользователях, полученные из Microsoft Graph, `SessionTokenStore` в объект, который будет храниться в сеансе.</span><span class="sxs-lookup"><span data-stu-id="b72fa-163">The code now passes the user details obtained from Microsoft Graph to the `SessionTokenStore` object to store in the session.</span></span>
+- <span data-ttu-id="b72fa-164">При успешном выполнении код не переправляется, он просто возвращает.</span><span class="sxs-lookup"><span data-stu-id="b72fa-164">On success, the code no longer redirects, it just returns.</span></span> <span data-ttu-id="b72fa-165">Это позволяет промежуточному по OWIN выполнить процесс проверки подлинности.</span><span class="sxs-lookup"><span data-stu-id="b72fa-165">This allows the OWIN middleware to complete the authentication process.</span></span>
 
-<span data-ttu-id="5bf79-166">Так как кэш маркера хранится в сеансе, обновите `SignOut` действие в `Controllers/AccountController.cs` , чтобы очистить хранилище маркеров перед выходом. Сначала добавьте следующий `using` оператор в начало файла.</span><span class="sxs-lookup"><span data-stu-id="5bf79-166">Since the token cache is stored in the session, update the `SignOut` action in `Controllers/AccountController.cs` to clear the token store before signing out. First, add the following `using` statement to the top of the file.</span></span>
+<span data-ttu-id="b72fa-166">Так как кэш маркера хранится в сеансе, обновите `SignOut` действие в `Controllers/AccountController.cs` , чтобы очистить хранилище маркеров перед выходом. Сначала добавьте следующий `using` оператор в начало файла.</span><span class="sxs-lookup"><span data-stu-id="b72fa-166">Since the token cache is stored in the session, update the `SignOut` action in `Controllers/AccountController.cs` to clear the token store before signing out. First, add the following `using` statement to the top of the file.</span></span>
 
 ```cs
 using graph_tutorial.TokenStorage;
 ```
 
-<span data-ttu-id="5bf79-167">Затем замените существующую `SignOut` функцию на приведенную ниже.</span><span class="sxs-lookup"><span data-stu-id="5bf79-167">Then, replace the existing `SignOut` function with the following.</span></span>
+<span data-ttu-id="b72fa-167">Затем замените существующую `SignOut` функцию на приведенную ниже.</span><span class="sxs-lookup"><span data-stu-id="b72fa-167">Then, replace the existing `SignOut` function with the following.</span></span>
 
 ```cs
 public ActionResult SignOut()
@@ -457,7 +456,7 @@ public ActionResult SignOut()
     if (Request.IsAuthenticated)
     {
         string signedInUserId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
-        SessionTokenStore tokenStore = new SessionTokenStore(signedInUserId, HttpContext);
+        SessionTokenStore tokenStore = new SessionTokenStore(signedInUserId, System.Web.HttpContext.Current);
 
         tokenStore.Clear();
 
@@ -469,7 +468,7 @@ public ActionResult SignOut()
 }
 ```
 
-<span data-ttu-id="5bf79-168">Сведения о кэшированном пользователе — это то, что потребуется для каждого представления в приложении, поэтому `BaseController` обновите класс, чтобы загрузить эти сведения из сеанса.</span><span class="sxs-lookup"><span data-stu-id="5bf79-168">The cached user details are something that every view in the application will need, so update the `BaseController` class to load this information from the session.</span></span> <span data-ttu-id="5bf79-169">Откройте `Controllers/BaseController.cs` и добавьте приведенные `using` ниже операторы в начало файла.</span><span class="sxs-lookup"><span data-stu-id="5bf79-169">Open `Controllers/BaseController.cs` and add the following `using` statements to the top of the file.</span></span>
+<span data-ttu-id="b72fa-168">Сведения о кэшированном пользователе — это то, что потребуется для каждого представления в приложении, поэтому `BaseController` обновите класс, чтобы загрузить эти сведения из сеанса.</span><span class="sxs-lookup"><span data-stu-id="b72fa-168">The cached user details are something that every view in the application will need, so update the `BaseController` class to load this information from the session.</span></span> <span data-ttu-id="b72fa-169">Откройте `Controllers/BaseController.cs` и добавьте приведенные `using` ниже операторы в начало файла.</span><span class="sxs-lookup"><span data-stu-id="b72fa-169">Open `Controllers/BaseController.cs` and add the following `using` statements to the top of the file.</span></span>
 
 ```cs
 using graph_tutorial.TokenStorage;
@@ -478,7 +477,7 @@ using System.Web;
 using Microsoft.Owin.Security.Cookies;
 ```
 
-<span data-ttu-id="5bf79-170">Затем добавьте указанную ниже функцию.</span><span class="sxs-lookup"><span data-stu-id="5bf79-170">Then add the following function.</span></span>
+<span data-ttu-id="b72fa-170">Затем добавьте указанную ниже функцию.</span><span class="sxs-lookup"><span data-stu-id="b72fa-170">Then add the following function.</span></span>
 
 ```cs
 protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -487,7 +486,7 @@ protected override void OnActionExecuting(ActionExecutingContext filterContext)
     {
         // Get the signed in user's id and create a token cache
         string signedInUserId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
-        SessionTokenStore tokenStore = new SessionTokenStore(signedInUserId, HttpContext);
+        SessionTokenStore tokenStore = new SessionTokenStore(signedInUserId, System.Web.HttpContext.Current);
 
         if (tokenStore.HasData())
         {
@@ -507,18 +506,18 @@ protected override void OnActionExecuting(ActionExecutingContext filterContext)
 }
 ```
 
-<span data-ttu-id="5bf79-171">Запустите сервер и пройдите процесс входа.</span><span class="sxs-lookup"><span data-stu-id="5bf79-171">Start the server and go through the sign-in process.</span></span> <span data-ttu-id="5bf79-172">Необходимо вернуться на домашнюю страницу, но пользовательский интерфейс должен измениться, чтобы показать, что вы вошли в систему.</span><span class="sxs-lookup"><span data-stu-id="5bf79-172">You should end up back on the home page, but the UI should change to indicate that you are signed-in.</span></span>
+<span data-ttu-id="b72fa-171">Запустите сервер и пройдите процесс входа.</span><span class="sxs-lookup"><span data-stu-id="b72fa-171">Start the server and go through the sign-in process.</span></span> <span data-ttu-id="b72fa-172">Необходимо вернуться на домашнюю страницу, но пользовательский интерфейс должен измениться, чтобы показать, что вы вошли в систему.</span><span class="sxs-lookup"><span data-stu-id="b72fa-172">You should end up back on the home page, but the UI should change to indicate that you are signed-in.</span></span>
 
 ![Снимок экрана домашней страницы после входа](./images/add-aad-auth-01.png)
 
-<span data-ttu-id="5bf79-174">Щелкните аватар пользователя в правом верхнем углу, чтобы получить доступ к ссылке **выхода** .</span><span class="sxs-lookup"><span data-stu-id="5bf79-174">Click the user avatar in the top right corner to access the **Sign Out** link.</span></span> <span data-ttu-id="5bf79-175">При нажатии кнопки **выйти** сбрасывается сеанс и возвращается на домашнюю страницу.</span><span class="sxs-lookup"><span data-stu-id="5bf79-175">Clicking **Sign Out** resets the session and returns you to the home page.</span></span>
+<span data-ttu-id="b72fa-174">Щелкните аватар пользователя в правом верхнем углу, чтобы получить доступ к ссылке **выхода** .</span><span class="sxs-lookup"><span data-stu-id="b72fa-174">Click the user avatar in the top right corner to access the **Sign Out** link.</span></span> <span data-ttu-id="b72fa-175">При нажатии кнопки **выйти** сбрасывается сеанс и возвращается на домашнюю страницу.</span><span class="sxs-lookup"><span data-stu-id="b72fa-175">Clicking **Sign Out** resets the session and returns you to the home page.</span></span>
 
 ![Снимок экрана с раскрывающимся меню со ссылкой "выйти"](./images/add-aad-auth-02.png)
 
-## <a name="refreshing-tokens"></a><span data-ttu-id="5bf79-177">Обновление маркеров</span><span class="sxs-lookup"><span data-stu-id="5bf79-177">Refreshing tokens</span></span>
+## <a name="refreshing-tokens"></a><span data-ttu-id="b72fa-177">Обновление маркеров</span><span class="sxs-lookup"><span data-stu-id="b72fa-177">Refreshing tokens</span></span>
 
-<span data-ttu-id="5bf79-178">На этом шаге приложение имеет маркер доступа, который отправляется в `Authorization` заголовке вызовов API.</span><span class="sxs-lookup"><span data-stu-id="5bf79-178">At this point your application has an access token, which is sent in the `Authorization` header of API calls.</span></span> <span data-ttu-id="5bf79-179">Это маркер, который позволяет приложению получать доступ к Microsoft Graph от имени пользователя.</span><span class="sxs-lookup"><span data-stu-id="5bf79-179">This is the token that allows the app to access the Microsoft Graph on the user's behalf.</span></span>
+<span data-ttu-id="b72fa-178">На этом шаге приложение имеет маркер доступа, который отправляется в `Authorization` заголовке вызовов API.</span><span class="sxs-lookup"><span data-stu-id="b72fa-178">At this point your application has an access token, which is sent in the `Authorization` header of API calls.</span></span> <span data-ttu-id="b72fa-179">Это маркер, который позволяет приложению получать доступ к Microsoft Graph от имени пользователя.</span><span class="sxs-lookup"><span data-stu-id="b72fa-179">This is the token that allows the app to access the Microsoft Graph on the user's behalf.</span></span>
 
-<span data-ttu-id="5bf79-180">Однако этот маркер кратковременно используется.</span><span class="sxs-lookup"><span data-stu-id="5bf79-180">However, this token is short-lived.</span></span> <span data-ttu-id="5bf79-181">Срок действия маркера истечет через час после его выдачи.</span><span class="sxs-lookup"><span data-stu-id="5bf79-181">The token expires an hour after it is issued.</span></span> <span data-ttu-id="5bf79-182">В этом случае маркер обновления становится полезен.</span><span class="sxs-lookup"><span data-stu-id="5bf79-182">This is where the refresh token becomes useful.</span></span> <span data-ttu-id="5bf79-183">Маркер обновления позволяет приложению запросить новый маркер доступа, не требуя от пользователя повторного входа.</span><span class="sxs-lookup"><span data-stu-id="5bf79-183">The refresh token allows the app to request a new access token without requiring the user to sign in again.</span></span>
+<span data-ttu-id="b72fa-180">Однако этот маркер кратковременно используется.</span><span class="sxs-lookup"><span data-stu-id="b72fa-180">However, this token is short-lived.</span></span> <span data-ttu-id="b72fa-181">Срок действия маркера истечет через час после его выдачи.</span><span class="sxs-lookup"><span data-stu-id="b72fa-181">The token expires an hour after it is issued.</span></span> <span data-ttu-id="b72fa-182">В этом случае маркер обновления становится полезен.</span><span class="sxs-lookup"><span data-stu-id="b72fa-182">This is where the refresh token becomes useful.</span></span> <span data-ttu-id="b72fa-183">Маркер обновления позволяет приложению запросить новый маркер доступа, не требуя от пользователя повторного входа.</span><span class="sxs-lookup"><span data-stu-id="b72fa-183">The refresh token allows the app to request a new access token without requiring the user to sign in again.</span></span>
 
-<span data-ttu-id="5bf79-184">Так как приложение использует библиотеку и `TokenCache` объект MSAL, нет необходимости реализовывать какую-либо логику обновления маркеров.</span><span class="sxs-lookup"><span data-stu-id="5bf79-184">Because the app is using the MSAL library and a `TokenCache` object, you do not have to implement any token refresh logic.</span></span> <span data-ttu-id="5bf79-185">`ConfidentialClientApplication.AcquireTokenSilentAsync` Метод выполняет всю логику.</span><span class="sxs-lookup"><span data-stu-id="5bf79-185">The `ConfidentialClientApplication.AcquireTokenSilentAsync` method does all of the logic for you.</span></span> <span data-ttu-id="5bf79-186">Сначала он проверяет кэшированный маркер и, если срок его действия не истек, он возвращает его.</span><span class="sxs-lookup"><span data-stu-id="5bf79-186">It first checks the cached token, and if it is not expired, it returns it.</span></span> <span data-ttu-id="5bf79-187">Если срок действия истек, он использует кэшированный маркер обновления, чтобы получить новый.</span><span class="sxs-lookup"><span data-stu-id="5bf79-187">If it is expired, it uses the cached refresh token to obtain a new one.</span></span> <span data-ttu-id="5bf79-188">Этот метод будет использоваться в следующем модуле.</span><span class="sxs-lookup"><span data-stu-id="5bf79-188">You'll use this method in the following module.</span></span>
+<span data-ttu-id="b72fa-184">Так как приложение использует библиотеку и `TokenCache` объект MSAL, нет необходимости реализовывать какую-либо логику обновления маркеров.</span><span class="sxs-lookup"><span data-stu-id="b72fa-184">Because the app is using the MSAL library and a `TokenCache` object, you do not have to implement any token refresh logic.</span></span> <span data-ttu-id="b72fa-185">`ConfidentialClientApplication.AcquireTokenSilentAsync` Метод выполняет всю логику.</span><span class="sxs-lookup"><span data-stu-id="b72fa-185">The `ConfidentialClientApplication.AcquireTokenSilentAsync` method does all of the logic for you.</span></span> <span data-ttu-id="b72fa-186">Сначала он проверяет кэшированный маркер и, если срок его действия не истек, он возвращает его.</span><span class="sxs-lookup"><span data-stu-id="b72fa-186">It first checks the cached token, and if it is not expired, it returns it.</span></span> <span data-ttu-id="b72fa-187">Если срок действия истек, он использует кэшированный маркер обновления, чтобы получить новый.</span><span class="sxs-lookup"><span data-stu-id="b72fa-187">If it is expired, it uses the cached refresh token to obtain a new one.</span></span> <span data-ttu-id="b72fa-188">Этот метод будет использоваться в следующем модуле.</span><span class="sxs-lookup"><span data-stu-id="b72fa-188">You'll use this method in the following module.</span></span>
