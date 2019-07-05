@@ -50,9 +50,8 @@
                         .WithClientSecret(appSecret)
                         .Build();
 
-                    string signedInUserId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    var tokenStore = new SessionTokenStore(signedInUserId, HttpContext.Current);
-                    tokenStore.Initialize(idClient.UserTokenCache);
+                    var tokenStore = new SessionTokenStore(idClient.UserTokenCache,
+                            HttpContext.Current, ClaimsPrincipal.Current);
 
                     var accounts = await idClient.GetAccountsAsync();
 
@@ -80,8 +79,8 @@
 1. Создайте контроллер для представлений календаря. Щелкните правой кнопкой мыши **** папку Controllers в обозревателе решений и выберите **Добавить контроллер >..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**. Присвойте имя `CalendarController` контроллеру и нажмите кнопку **Добавить**. Замените все содержимое нового файла приведенным ниже кодом.
 
     ```cs
-    using System;
     using graph_tutorial.Helpers;
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
