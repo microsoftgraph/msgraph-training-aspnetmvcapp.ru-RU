@@ -39,8 +39,8 @@
     Install-Package Microsoft.Owin.Host.SystemWeb
     Install-Package Microsoft.Owin.Security.OpenIdConnect
     Install-Package Microsoft.Owin.Security.Cookies
-    Install-Package Microsoft.Identity.Client -Version 4.0.0
-    Install-Package Microsoft.Graph -Version 1.15.0
+    Install-Package Microsoft.Identity.Client -Version 4.3.1
+    Install-Package Microsoft.Graph -Version 1.17.0
     ```
 
 ## <a name="design-the-app"></a>Проектирование приложения
@@ -168,7 +168,7 @@
     ```
 
     > [!NOTE]
-    > В этом коде [](https://getbootstrap.com/) добавляется начальная загрузка для простых стилей и [Шрифт Awesome](https://fontawesome.com/) для некоторых простых значков. Он также определяет глобальную структуру с помощью панели навигации и использует `Alert` класс для отображения оповещений.
+    > В этом коде добавляется [Начальная](https://getbootstrap.com/) загрузка для простых стилей и [Шрифт Awesome](https://fontawesome.com/) для некоторых простых значков. Он также определяет глобальную структуру с помощью панели навигации и использует `Alert` класс для отображения оповещений.
 
 1. Откройте `Content/Site.css` и замените все содержимое приведенным ниже кодом.
 
@@ -206,7 +206,7 @@
     </div>
     ```
 
-1. Щелкните правой кнопкой мыши **** папку Controllers в обозревателе решений и выберите **Добавить контроллер >..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**. Присвойте имя `BaseController` контроллеру и нажмите кнопку **Добавить**. Замените содержимое файла `BaseController.cs` на приведенный ниже код.
+1. Щелкните правой кнопкой мыши папку **Controllers** в обозревателе решений и выберите **Добавить контроллер >..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**. Присвойте имя `BaseController` контроллеру и нажмите кнопку **Добавить**. Замените содержимое файла `BaseController.cs` на приведенный ниже код.
 
     ```cs
     using graph_tutorial.Models;

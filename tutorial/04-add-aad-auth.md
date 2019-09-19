@@ -28,7 +28,7 @@
 
 Начните с инициализации промежуточного слоя OWIN для использования проверки подлинности Azure AD для приложения.
 
-1. Щелкните правой кнопкой мыши папку **апп_старт** в обозревателе решений и выберите команду **Добавить класс >..**.. Присвойте файлу `Startup.Auth.cs` имя и нажмите кнопку **Добавить**. Замените все содержимое приведенным ниже кодом.
+1. Щелкните правой кнопкой мыши папку **App_Start** в обозревателе решений и выберите команду **Добавить класс >..**.. Присвойте файлу `Startup.Auth.cs` имя и нажмите кнопку **Добавить**. Замените все содержимое приведенным ниже кодом.
 
     ```cs
     using Microsoft.Identity.Client;
@@ -60,39 +60,39 @@
                 app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
                 app.UseOpenIdConnectAuthentication(
-                  new OpenIdConnectAuthenticationOptions
-                  {
-                      ClientId = appId,
-                      Authority = "https://login.microsoftonline.com/common/v2.0",
-                      Scope = $"openid email profile offline_access {graphScopes}",
-                      RedirectUri = redirectUri,
-                      PostLogoutRedirectUri = redirectUri,
-                      TokenValidationParameters = new TokenValidationParameters
-                      {
-                          // For demo purposes only, see below
-                          ValidateIssuer = false
+                    new OpenIdConnectAuthenticationOptions
+                    {
+                        ClientId = appId,
+                        Authority = "https://login.microsoftonline.com/common/v2.0",
+                        Scope = $"openid email profile offline_access {graphScopes}",
+                        RedirectUri = redirectUri,
+                        PostLogoutRedirectUri = redirectUri,
+                        TokenValidationParameters = new TokenValidationParameters
+                        {
+                            // For demo purposes only, see below
+                            ValidateIssuer = false
 
-                          // In a real multi-tenant app, you would add logic to determine whether the
-                          // issuer was from an authorized tenant
-                          //ValidateIssuer = true,
-                          //IssuerValidator = (issuer, token, tvp) =>
-                          //{
-                          //  if (MyCustomTenantValidation(issuer))
-                          //  {
-                          //    return issuer;
-                          //  }
-                          //  else
-                          //  {
-                          //    throw new SecurityTokenInvalidIssuerException("Invalid issuer");
-                          //  }
-                          //}
-                      },
-                      Notifications = new OpenIdConnectAuthenticationNotifications
-                      {
-                          AuthenticationFailed = OnAuthenticationFailedAsync,
-                          AuthorizationCodeReceived = OnAuthorizationCodeReceivedAsync
-                      }
-                  }
+                            // In a real multi-tenant app, you would add logic to determine whether the
+                            // issuer was from an authorized tenant
+                            //ValidateIssuer = true,
+                            //IssuerValidator = (issuer, token, tvp) =>
+                            //{
+                            //  if (MyCustomTenantValidation(issuer))
+                            //  {
+                            //    return issuer;
+                            //  }
+                            //  else
+                            //  {
+                            //    throw new SecurityTokenInvalidIssuerException("Invalid issuer");
+                            //  }
+                            //}
+                        },
+                        Notifications = new OpenIdConnectAuthenticationNotifications
+                        {
+                            AuthenticationFailed = OnAuthenticationFailedAsync,
+                            AuthorizationCodeReceived = OnAuthorizationCodeReceivedAsync
+                        }
+                    }
                 );
             }
 
@@ -175,7 +175,7 @@
     }
     ```
 
-1. Добавление контроллера для обработки входа. Щелкните правой кнопкой мыши **** папку Controllers в обозревателе решений и выберите **Добавить контроллер >..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**. Присвойте имя `AccountController` контроллеру и нажмите кнопку **Добавить**. Замените все содержимое файла приведенным ниже кодом.
+1. Добавление контроллера для обработки входа. Щелкните правой кнопкой мыши папку **Controllers** в обозревателе решений и выберите **Добавить контроллер >..**.. Выберите **контроллер MVC 5 — пустой** и нажмите кнопку **Добавить**. Присвойте имя `AccountController` контроллеру и нажмите кнопку **Добавить**. Замените все содержимое файла приведенным ниже кодом.
 
     ```cs
     using Microsoft.Owin.Security;
@@ -414,7 +414,7 @@
                     var userObjectId = user.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value ??
                         user.FindFirst("oid").Value;
 
-                    var userTenantId = user.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value ??
+                    var userTenantId = user.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value ??
                         user.FindFirst("tid").Value;
 
                     if (!string.IsNullOrEmpty(userObjectId) && !string.IsNullOrEmpty(userTenantId))
@@ -429,10 +429,11 @@
     }
     ```
 
-1. Добавьте следующий `using` оператор в начало `App_Start/Startup.Auth.cs` файла.
+1. Добавьте приведенные `using` ниже операторы в начало `App_Start/Startup.Auth.cs` файла.
 
     ```cs
     using graph_tutorial.TokenStorage;
+    using System.Security.Claims;
     ```
 
 1. Замените имеющуюся функцию `OnAuthorizationCodeReceivedAsync` указанным ниже кодом.
