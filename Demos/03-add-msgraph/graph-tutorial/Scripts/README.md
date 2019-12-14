@@ -7,13 +7,14 @@
 </p>
 
 <p align="center">
-    <a href="https://travis-ci.org/FezVrasta/popper.js/branches" target="_blank"><img src="https://travis-ci.org/FezVrasta/popper.js.svg?branch=master" alt="Build Status"/></a>
-    <img src="http://img.badgesize.io/https://unpkg.com/popper.js/dist/popper.min.js?compression=gzip" alt="Stable Release Size"/>
-    <a href="https://www.bithound.io/github/FezVrasta/popper.js"><img src="https://www.bithound.io/github/FezVrasta/popper.js/badges/score.svg" alt="bitHound Overall Score"></a>
+    <img src="http://badge-size.now.sh/https://unpkg.com/popper.js/dist/popper.min.js?compression=brotli" alt="Stable Release Size"/>
+  <img src="http://badge-size.now.sh/https://unpkg.com/popper.js/dist/popper.min.js?compression=gzip" alt="Stable Release Size"/>
     <a href="https://codeclimate.com/github/FezVrasta/popper.js/coverage"><img src="https://codeclimate.com/github/FezVrasta/popper.js/badges/coverage.svg" alt="Istanbul Code Coverage"/></a>
-    <a href="https://gitter.im/FezVrasta/popper.js" target="_blank"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Get support or discuss"/></a>
+    <a href="https://www.npmjs.com/browse/depended/popper.js"><img src="https://badgen.net/npm/dependents/popper.js" alt="Dependents packages" /></a>
+    <a href="https://spectrum.chat/popper-js" target="_blank"><img src="https://img.shields.io/badge/chat-on_spectrum-6833F9.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBpZD0iTGl2ZWxsb18xIiBkYXRhLW5hbWU9IkxpdmVsbG8gMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTAgOCI%2BPGRlZnM%2BPHN0eWxlPi5jbHMtMXtmaWxsOiNmZmY7fTwvc3R5bGU%2BPC9kZWZzPjx0aXRsZT5zcGVjdHJ1bTwvdGl0bGU%2BPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNSwwQy40MiwwLDAsLjYzLDAsMy4zNGMwLDEuODQuMTksMi43MiwxLjc0LDMuMWgwVjcuNThhLjQ0LjQ0LDAsMCwwLC42OC4zNUw0LjM1LDYuNjlINWM0LjU4LDAsNS0uNjMsNS0zLjM1UzkuNTgsMCw1LDBaTTIuODMsNC4xOGEuNjMuNjMsMCwxLDEsLjY1LS42M0EuNjQuNjQsMCwwLDEsMi44Myw0LjE4Wk01LDQuMThhLjYzLjYzLDAsMSwxLC42NS0uNjNBLjY0LjY0LDAsMCwxLDUsNC4xOFptMi4xNywwYS42My42MywwLDEsMSwuNjUtLjYzQS42NC42NCwwLDAsMSw3LjE3LDQuMThaIi8%2BPC9zdmc%2B" alt="Get support or discuss"/></a>
     <br />
-    <a href="https://saucelabs.com/u/popperjs" target="_blank"><img src="https://badges.herokuapp.com/browsers?labels=none&googlechrome=latest&firefox=latest&microsoftedge=latest&iexplore=11,10&safari=latest&iphone=latest" alt="SauceLabs Reports"/></a>
+    <a href="https://travis-ci.org/FezVrasta/popper.js/branches" target="_blank"><img src="https://travis-ci.org/FezVrasta/popper.js.svg?branch=master" alt="Build Status"/></a>
+    <a href="https://saucelabs.com/u/popperjs" target="_blank"><img src="https://badges.herokuapp.com/browsers?labels=none&googlechrome=latest&firefox=latest&microsoftedge=latest&iexplore=11,10&safari=latest" alt="SauceLabs Reports"/></a>
 </p>
 
 <img src="https://raw.githubusercontent.com/FezVrasta/popper.js/master/popperjs.png" align="right" width=250 />
@@ -31,7 +32,7 @@
 Ну, по сути, **нет**.  
 Поппер. js — это **механизм позиционирования**, предназначенный для вычисления положения элемента, чтобы его можно было разместить рядом с заданном ссылочным элементом.  
 
-Модуль полностью модульный и большинство его компонентов реализуются как модификаторы ( **** аналогично промежуточным или подключаемым по).  
+Модуль полностью модульный и большинство его компонентов реализуются как **модификаторы** (аналогично промежуточным или подключаемым по).  
 База кода целиком написана в ES2015, а ее компоненты автоматически тестируются на реальных браузерах с [сауцелабс](https://saucelabs.com/) и [трависЦи](https://travis-ci.org/).
 
 Поппер. js имеет нулевые зависимости. Нет jQuery, без LoDash, Nothing.  
@@ -43,14 +44,14 @@
 
 Вот некоторые ключевые моменты:
 
-- Располагать элементы в исходном контексте DOM (не запутаться с МОДЕЛЬЮ DOM!);
+- Располагать элементы в исходном контексте DOM (не запутаться с моделью DOM!);
 - Позволяет экспортировать вычисляемые сведения для интеграции с другими библиотеками представлений;
 - Поддерживает теневые элементы DOM;
 - Полностью настраиваемая с учетом структуры модификаторов;
 
 Посетите [страницу проекта](https://fezvrasta.github.io/popper.js) , чтобы увидеть множество примеров того, что можно делать с Поппер. js!
 
-[Здесь](/docs/_includes/popper-documentation.md)вы найдете документацию.
+Здесь вы найдете [документацию](/docs/_includes/popper-documentation.md).
 
 
 ### <a name="tooltipjs"></a>ToolTip. js
@@ -60,7 +61,7 @@
 Его API почти идентичны с помощью знаменитой системы всплывающих подсказок начальной загрузки, таким образом, она будет легко интегрироваться в проекты.  
 Всплывающие подсказки, создаваемые ToolTip. js, доступны благодаря `aria` тегам.
 
-[Здесь](/docs/_includes/tooltip-documentation.md)вы найдете документацию.
+Здесь вы найдете [документацию](/docs/_includes/tooltip-documentation.md).
 
 
 ## <a name="installation"></a>Установка
@@ -116,7 +117,7 @@ var anotherPopper = new Popper(
 
 ### <a name="callbacks"></a>Обратных вызовов
 
-Поппер. js поддерживает два типа обратных вызовов, а `onCreate` обратный вызов вызывается после того, как Поппер инитализед. `onUpdate` Он вызывается при каждом последующем обновлении.
+Поппер. js поддерживает два вида обратных вызовов, а `onCreate` обратный вызов вызывается после инициализации Поппер. `onUpdate` Он вызывается при каждом последующем обновлении.
 
 ```js
 const reference = document.querySelector('.my-button');
@@ -178,9 +179,9 @@ https://github.com/FezVrasta/popper.js/issues/62
 
 Если у вас возникнут вопросы, вы можете прокомментировать эту ошибку.
 
-### <a name="performances"></a>Перформанцес
+### <a name="performances"></a>перформанцес
 
-Поппер. js очень производительно. Обычно он занимает 0,5 мс, чтобы вычислить положение Поппер (на ИМАК с Intel Core i5 с 3,5-Е ГГц).  
+Поппер. js очень производительно. Обычно он занимает 0,5 мс, чтобы вычислить положение Поппер (на ИМАК с Intel Core i5 с 3,5-е ГГц).  
 Это означает, что он не будет вызывать никаких [жанк](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/anatomy-of-jank), что приводит к гладкому взаимодействию с пользователем.
 
 ## <a name="notes"></a>Примечания
