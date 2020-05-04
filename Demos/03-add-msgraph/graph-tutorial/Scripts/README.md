@@ -67,7 +67,7 @@
 ## <a name="installation"></a>Установка
 Поппер. js доступен для следующих диспетчеров пакетов и сети CDN:
 
-| Source |                                                                                  |
+| Источник |                                                                                  |
 |:-------|:---------------------------------------------------------------------------------|
 | npm    | `npm install popper.js --save`                                                   |
 | Yarn   | `yarn add popper.js`                                                             |
@@ -78,7 +78,7 @@
 
 Подсказка и JS:
 
-| Source |                                                                                  |
+| Источник |                                                                                  |
 |:-------|:---------------------------------------------------------------------------------|
 | npm    | `npm install tooltip.js --save`                                                  |
 | Yarn   | `yarn add tooltip.js`                                                            |
@@ -184,7 +184,7 @@ https://github.com/FezVrasta/popper.js/issues/62
 Поппер. js очень производительно. Обычно он занимает 0,5 мс, чтобы вычислить положение Поппер (на ИМАК с Intel Core i5 с 3,5-е ГГц).  
 Это означает, что он не будет вызывать никаких [жанк](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/anatomy-of-jank), что приводит к гладкому взаимодействию с пользователем.
 
-## <a name="notes"></a>Примечания
+## <a name="notes"></a>Заметки
 
 ### <a name="libraries-using-popperjs"></a>Библиотеки, использующие Поппер. js
 

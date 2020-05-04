@@ -8,7 +8,7 @@
 > - Скачайте [краткий старт ASP.NET](https://developer.microsoft.com/graph/quick-start?platform=option-dotnet) для получения рабочего кода в минутах.
 > - Скачайте или скопируйте [репозиторий GitHub](https://github.com/microsoftgraph/msgraph-training-aspnetmvcapp).
 
-## <a name="prerequisites"></a>Необходимые компоненты
+## <a name="prerequisites"></a>Предварительные требования
 
 Прежде чем приступить к работе с этим руководством, на компьютере для разработки должен быть установлен [Visual Studio](https://visualstudio.microsoft.com/vs/) . Если у вас нет Visual Studio, посетите предыдущую ссылку для получения вариантов загрузки.
 
@@ -25,6 +25,6 @@
 > [!VIDEO https://www.youtube-nocookie.com/embed/a2teHZ5WuNc]
 <!-- markdownlint-enable MD033 MD034 -->
 
-## <a name="feedback"></a>Обратная связь
+## <a name="feedback"></a>Отзывы
 
 Сообщите о нем в [репозиторий GitHub](https://github.com/microsoftgraph/msgraph-training-aspnetmvcapp).
